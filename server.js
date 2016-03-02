@@ -17,6 +17,7 @@ require('./server/config/routes.js')(app);
 var server = app.listen(8000, function() {
   console.log('cool stuff on: 8000');
 });
+
 var io = require('socket.io').listen(server)
 var player_count;
 var characters = [];
@@ -142,15 +143,16 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('disconnect', function(){
 		console.log("disconnected")
-		battling=false;
 		if (character1){
 			if(character1.socketid === socket.id){
 				character1 = null;
+				battling=false;
 			}
 		}
 		if (character2){
 			if (character2.socketid === socket.id ){
-			character2 = null;
+				character2 = null;
+				battling=false;
 			}
 		}
 	})

@@ -67,6 +67,7 @@ board.controller('PokemonController', function($scope,PokemonFactory,$uibModal,$
 	        },
 	      }
 	    });
+
 	   }
 
 	   $scope.battle2 = function (size,pokeman) {
@@ -182,7 +183,6 @@ board.controller('ModalInstanceCtrl', function($scope,$uibModalInstance,pokeman)
 });
 
 board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mychar,socket) {
-
 
 
 	  $scope.mypokemon = mypokemon;
@@ -303,6 +303,8 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 
 
 	  $scope.cancel = function () {
+	  	$scope.won = false;
+	  	$scope.lost = false;
 	  	var battlesong = document.getElementById("battletheme");
 		battlesong.pause();
 	    $uibModalInstance.dismiss('close');
