@@ -192,12 +192,13 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 		  		{
 		  			$scope.current_pokemon.current_hp = 0;
 		  			$scope.mypokemon[$scope.current_pokemon_index] = $scope.current_pokemon;
-		  			$scope.alert = $scope.current_pokemon + " has fallen!";
+		  			$scope.alert = $scope.current_pokemon + " has fainted!";
 		  			$scope.current_pokemon = null;
-		  			var lost = true;
-		  			for (pokeman in $scope.mypokemon){
-		  				if (pokeman.current_hp > 0){
-		  					lost = false;
+		  			$scope.lost = true;
+		  			for (index in $scope.mypokemon)
+		  			{
+		  				if ($scope.mypokemon[index].current_hp >= 0){
+		  					$scope.lost = false;
 		  				}
 		  			}
 		  			if (lost == true){
@@ -220,15 +221,15 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 		  		{
 		  			$scope.current_pokemon.current_hp = 0;
 		  			$scope.mypokemon[$scope.current_pokemon_index] = $scope.current_pokemon;
-		  			$scope.alert = $scope.current_pokemon + " has fallen!";
+		  			$scope.alert = $scope.current_pokemon + " has fainted!";
 		  			$scope.current_pokemon = null;
-		  			var lost = true;
-		  			for (pokeman in $scope.mypokemon){
-		  				if (pokeman.current_hp > 0){
-		  					lost = false;
+		  			$scope.lost = true;
+		  			for (index in $scope.mypokemon){
+		  				if ($scope.mypokemon[index].current_hp >= 0){
+		  					$scope.lost = false;
 		  				}
 		  			}
-		  			if (lost == true){
+		  			if ($scope.lost == true){
 		  				socket.emit("lost", {player:$scope.mychar})
 		  			}
 		  		}

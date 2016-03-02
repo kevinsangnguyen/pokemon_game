@@ -30,7 +30,7 @@ var battling = false;
 var number_players = characters.length
 
 io.sockets.on('connection', function (socket) {
-	
+
 	player_count = 0;
 	if(character1){
 		player_count += 1
@@ -132,7 +132,6 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('lost',function(player){
 		io.emit("alert", "Your opponent has no more Pokemon! Battle is over! Please refresh to battle again.")
-		battling=false;
 	});
 	
 
