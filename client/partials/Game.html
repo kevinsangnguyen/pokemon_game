@@ -22,8 +22,16 @@
 		background-image: url('../images/Training.png');
 		width: 940px;
 		height: 320px;
-		position:relative;
-		border:solid 2px;
+		position: relative;
+		border:solid 10px;
+		margin: 0px auto;
+	}
+
+	#info {
+		width: 940px;
+		height: 320px;
+		position: relative;
+		margin: 0px auto;
 	}
 
 	.app-modal-window .modal-dialog {
@@ -121,11 +129,9 @@
 				<div id="ch2" class="character2"></div>
 			</div>
 
-
-			<div ng-controller="PokemonController">
-				<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Your Pokemon</button>
+			<div id="info" ng-controller="PokemonController" >
+					<button class="btn btn-success" ng-click="isCollapsed = !isCollapsed" style="margin:0px auto;">Your Pokemon</button>
 				<div uib-collapse="isCollapsed">
-						<hr>
 						  <table class="table table-hover" style="width:940px">
 						    <thead>
 						      <tr>
@@ -150,6 +156,8 @@
 				</div>
 			</div>
 		</div>
+
+
 
 </body>
 </html>

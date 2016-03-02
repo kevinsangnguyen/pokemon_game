@@ -133,6 +133,10 @@ io.sockets.on('connection', function (socket) {
 	socket.on('lost',function(player){
 		io.emit("alert", "Your opponent has no more Pokemon! Battle is over! Please refresh to battle again.")
 	});
+
+	socket.on("new_pokemon",function(alert){
+		io.emit('alert',alert)
+	})
 	
 
 	socket.on('disconnect', function(){
