@@ -8,7 +8,7 @@ board.factory('PokemonFactory', function($http) {
 		}  
 
 		factory.index = function(callback) {
-
+			pokemon = [];
 			for (var i=0;i<3;i++)
 			{
 				random_number = Math.floor((Math.random() * 151) + 1);
@@ -24,7 +24,7 @@ board.factory('PokemonFactory', function($http) {
 
 							}
 							else {
-							move.power = Math.floor(move.power * .5)
+							move.power = Math.floor(move.power * .55)
 							move.name = uppercase(move.name)
 							output.move_set.push(move);
 							}

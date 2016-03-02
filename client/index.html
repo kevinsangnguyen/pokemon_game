@@ -1,6 +1,6 @@
-<html>
+<html ng-app="board">
 <head>
-	<title>Pokemon</title>
+	<title>Pokemon Simulation</title>
 	<!-- require angular -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
@@ -34,17 +34,26 @@
 	<script type="text/javascript" src="factories/socket.js"></script>
 	<script type="text/javascript" src="factories/pokemon_factory.js"></script>
 	<script type="text/javascript" src="controllers/pokemon_controller.js"></script>
-	<script type="text/javascript" src="controllers/player_count.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
+	<script type="text/javascript" src="controllers/main_controller.js"></script>
 
-		});
-	</script>
+	<style>
+	.start-bg {
+		background-image: url('../images/pikachu.jpg');
+	}
+
+	.game-bg {
+		background: url('../images/snorlax.jpg') no-repeat center center fixed;
+		background-attachment: fixed;
+		background-size: cover;
+	}
+
+
+	</style>
 
 
 </head>
 
-<body ng-app='board'>
+<body ng-controller='MainController' ng-class="bgService.getCurrentBg()">
   <div ng-view=''>
   </div>
 </body>

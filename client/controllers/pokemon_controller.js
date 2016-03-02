@@ -1,11 +1,18 @@
-board.controller('PokemonController', function($scope,PokemonFactory,$uibModal,$log,socket, $routeParams) {
-
+board.controller('PokemonController', function($scope,PokemonFactory,$uibModal,$log,socket, $routeParams, BackgroundService) {
+		BackgroundService.setCurrentBg('game-bg')
 		$scope.isCollapsed = true;
 
 		PokemonFactory.index(function(data) {
 		  $scope.pokemon = data;
-		  $scope.current_pokemon = $scope.pokemon[0];
 		});
+
+		$scope.refresh = function (){
+			PokemonFactory.index(function(data) {
+				$scope.pokemon = data;
+			});
+
+			socket.emit("battle_ready");
+		}
 
 		$scope.download = function (){
 			PokemonFactory.getAll();
@@ -180,6 +187,7 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 
 	  $scope.mypokemon = mypokemon;
 	  $scope.mychar = mychar;
+	  $scope.won = false;
 
 	  if ($scope.mychar == "Character1")
 		  {
@@ -233,7 +241,6 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 		  			if ($scope.lost == true){
 		  				socket.emit("lost", {player:$scope.mychar})
 		  			}
-		  			console.log($scope.lost)
 		  		}
 		  	});
 		  }
@@ -265,7 +272,14 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 	  };
 
 	  $scope.attack = function(move){
-	  	var alert = $scope.current_pokemon.name + " used " + move.name + " and it did " + move.power + " damage!!"
+	  	var crit_chance = Math.floor((Math.random() * 100) + 1);
+	  	if (crit_chance < 7){
+	  		move.power = Math.floor(move.power*1.5)
+	  		var alert = $scope.current_pokemon.name + " used " + move.name + " and it was a critical hit!!"
+	  	}
+	  	else {
+	  		var alert = $scope.current_pokemon.name + " used " + move.name + " and it did " + move.power + " damage!!"
+	  	}
 	  	if ($scope.mychar == "Character1"){
 	  		socket.emit("attack1",{move:move, alert:alert})
 	  	}
@@ -273,6 +287,13 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 	  		socket.emit("attack2",{move:move, alert:alert})
 	  	}
 	  }
+
+	  socket.on("won",function(character){
+	  	if ($scope.mychar == character)
+	  	{
+	  		$scope.won = true;
+	  	}
+	  })
 
 	  socket.on("alert",function(alert){
 	  	$scope.alert = alert;
@@ -283,7 +304,7 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 
 	  $scope.cancel = function () {
 	  	var battlesong = document.getElementById("battletheme");
-			battlesong.pause();
+		battlesong.pause();
 	    $uibModalInstance.dismiss('close');
 	  };
 

@@ -4,20 +4,17 @@ function PlayGround(selector_ch1,x,y,action,default_action)
 
 	this.initialize = function() {
 		$(document).keydown(function(e) {
-			if(e.keyCode == 39) {
+			if(e.keyCode == 68) {
 				ch1.updateAction("RIGHT");
 			}
-			else if(e.keyCode == 37) {
+			else if(e.keyCode == 65) {
 				ch1.updateAction("LEFT");
 			}
-			else if(e.keyCode == 38) {
+			else if(e.keyCode == 87) {
 				ch1.updateAction("UP");
 			}
-			else if(e.keyCode == 40) {
+			else if(e.keyCode == 83) {
 				ch1.updateAction("DOWN");
-			}
-			else if(e.keyCode == 32) {
-				ch1.updateAction("INTERACT");
 			}
 
 		});

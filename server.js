@@ -31,16 +31,6 @@ var number_players = characters.length
 
 io.sockets.on('connection', function (socket) {
 
-	player_count = 0;
-	if(character1){
-		player_count += 1
-	}
-	if(character2){
-		player_count += 1
-	}
-	socket.emit('player_count', player_count);
-
-
 	if(!character1){
 		socket.emit("START",{status:"Character1",character1 : character1, character2: character2})
 		character1 = {};
@@ -131,11 +121,22 @@ io.sockets.on('connection', function (socket) {
 	})
 
 	socket.on('lost',function(player){
-		io.emit("alert", "Your opponent has no more Pokemon! Battle is over! Please refresh to battle again.")
+		console.log(player);
+		io.emit("alert", "Your opponent has no more Pokemon! Battle is over! Please refresh your pokemon to battle again.")
+		if (player.player == "Character1"){
+			io.emit("won","Character2")
+		}
+		if (player.player == "Character2"){
+			io.emit("won","Character1")
+		}
 	});
 
 	socket.on("new_pokemon",function(alert){
 		io.emit('alert',alert)
+	})
+
+	socket.on("battle_ready",function(){
+		battling = false;
 	})
 	
 
