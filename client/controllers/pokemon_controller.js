@@ -1,4 +1,4 @@
-board.controller('PokemonController', function($scope,PokemonFactory,$uibModal,$log,socket) {
+board.controller('PokemonController', function($scope,PokemonFactory,$uibModal,$log,socket, $routeParams) {
 
 		$scope.isCollapsed = true;
 
@@ -116,6 +116,8 @@ board.controller('PokemonController', function($scope,PokemonFactory,$uibModal,$
 			socket.on("Battle",function(){
 				$scope.battle();
 			});
+
+			$scope.player_count = 0;
 		}
 
 		if (data.status == "Character2"){
@@ -150,6 +152,12 @@ board.controller('PokemonController', function($scope,PokemonFactory,$uibModal,$
 				themesong.pause();
 				$scope.battle();
 			})
+
+			$scope.player_count = 1;
+		}
+
+		if(data.status=="Full"){
+			$scope.player_count = 2;
 		}
 
 	});
@@ -180,6 +188,24 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 		  	});
 		  	socket.on("attacked1",function(move){
 		  		$scope.current_pokemon.current_hp -= move.power;
+		  		if ($scope.current_pokemon.current_hp < 0)
+		  		{
+		  			$scope.current_pokemon.current_hp = 0;
+		  			$scope.mypokemon[$scope.current_pokemon_index] = $scope.current_pokemon;
+		  			$scope.alert = $scope.current_pokemon + " has fallen!";
+		  			$scope.current_pokemon = null;
+		  			var lost = true;
+		  			for (pokeman in $scope.mypokemon){
+		  				if (pokeman.current_hp > 0){
+		  					lost = false;
+		  				}
+		  			}
+		  			if (lost == true){
+		  				socket.emit("lost",{player:$scope.mychar})
+		  			}
+		  		}
+
+
 		  	});
 		  }
 
@@ -190,6 +216,22 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 		  	});
 		  	socket.on("attacked2",function(move){
 		  		$scope.current_pokemon.current_hp -= move.power;
+		  		if ($scope.current_pokemon.current_hp < 0)
+		  		{
+		  			$scope.current_pokemon.current_hp = 0;
+		  			$scope.mypokemon[$scope.current_pokemon_index] = $scope.current_pokemon;
+		  			$scope.alert = $scope.current_pokemon + " has fallen!";
+		  			$scope.current_pokemon = null;
+		  			var lost = true;
+		  			for (pokeman in $scope.mypokemon){
+		  				if (pokeman.current_hp > 0){
+		  					lost = false;
+		  				}
+		  			}
+		  			if (lost == true){
+		  				socket.emit("lost", {player:$scope.mychar})
+		  			}
+		  		}
 		  	});
 		  }
 
@@ -206,6 +248,7 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 
 	  $scope.choosepokemon = function (pokeman){
 	  	$scope.current_pokemon = pokeman;
+	  	$scope.current_pokemon_index = $scope.mypokemon.indexOf(pokeman);
 	  	if ($scope.mychar == "Character1")
 		  {
 		  	socket.emit("character1_current_pokemon",$scope.current_pokemon);

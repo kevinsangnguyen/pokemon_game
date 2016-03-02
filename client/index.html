@@ -21,8 +21,8 @@
         .when('/',{
             templateUrl: 'partials/Start.html'
         })
-        .when('/Main',{
-            templateUrl: 'partials/Main.html'
+        .when('/game',{
+            templateUrl: 'partials/Game.html'
         })
         .otherwise({
           redirectTo: '/'
@@ -34,6 +34,7 @@
 	<script type="text/javascript" src="factories/socket.js"></script>
 	<script type="text/javascript" src="factories/pokemon_factory.js"></script>
 	<script type="text/javascript" src="controllers/pokemon_controller.js"></script>
+	<script type="text/javascript" src="controllers/player_count.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 

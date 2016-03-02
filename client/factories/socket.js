@@ -21,6 +21,10 @@ board.factory('socket', function ($rootScope) {
           }
         });
       })
-    }
+    },
+
+    disconnect: function(){
+      socket.disconnect();
+    },
   };
 });

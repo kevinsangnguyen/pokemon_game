@@ -18,6 +18,7 @@ var server = app.listen(8000, function() {
   console.log('cool stuff on: 8000');
 });
 var io = require('socket.io').listen(server)
+var player_count;
 var characters = [];
 var character1;
 var character2;
@@ -29,7 +30,15 @@ var battling = false;
 var number_players = characters.length
 
 io.sockets.on('connection', function (socket) {
-
+	
+	player_count = 0;
+	if(character1){
+		player_count += 1
+	}
+	if(character2){
+		player_count += 1
+	}
+	socket.emit('player_count', player_count);
 
 
 	if(!character1){
@@ -43,7 +52,7 @@ io.sockets.on('connection', function (socket) {
 		character2.socketid = socket.id;
 	}
 	else {
-		// socket.emit("START","Game is FULL")
+		socket.emit("START",{status:"Full"})
 	}
 
 
@@ -104,6 +113,9 @@ io.sockets.on('connection', function (socket) {
 		io.emit('attacked2', attack.move);
 		character2_current_pokemon.current_hp -= attack.move.power;
 		io.emit("alert", attack.alert)
+		if (character2_current_pokemon.current_hp <= 0){
+			io.emit("alert", character2_current_pokemon.name + " has fallen!")
+		}
 		io.emit("character2_pokemon", character2_current_pokemon)
 		io.emit("Turn","Character2");
 	})
@@ -111,9 +123,17 @@ io.sockets.on('connection', function (socket) {
 		io.emit('attacked1', attack.move);
 		character1_current_pokemon.current_hp -= attack.move.power;
 		io.emit("alert", attack.alert)
+		if (character1_current_pokemon.current_hp <= 0){
+			io.emit("alert", character1_current_pokemon.name + " has fallen!")
+		}
 		io.emit("character1_pokemon", character1_current_pokemon)
 		io.emit("Turn","Character1");
 	})
+
+	socket.on('lost',function(player){
+		io.emit("alert", "Your opponent has no more Pokemon! Battle is over! Please refresh to battle again.")
+		battling=false;
+	});
 	
 
 	socket.on('disconnect', function(){

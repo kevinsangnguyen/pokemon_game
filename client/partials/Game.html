@@ -23,7 +23,7 @@
 		width: 940px;
 		height: 320px;
 		position:relative;
-		border:solid 1px;
+		border:solid 2px;
 	}
 
 	.app-modal-window .modal-dialog {
@@ -64,7 +64,8 @@
 	    		<ul style="list-style-image: url('../images/pokeball.gif');">
 	    		<li ng-repeat="pokeman in mypokemon">
 		    		<img width="96" height="96" src="http://pokeapi.co/media/img/{{pokeman.index}}.png">
-		    		<button class="btn btn-primary" ng-click="choosepokemon(pokeman)" aria-label="Toggle ngHide">{{pokeman.name}}</button>
+		    		<button ng-if="pokeman.current_hp > 0" class="btn btn-primary" ng-click="choosepokemon(pokeman)" aria-label="Toggle ngHide">{{pokeman.name}}</button>
+		    		<button ng-if="pokeman.current_hp <= 0" class="btn btn-danger"><strike>{{pokeman.name}}</strike></button>
 		    		<uib-progressbar class="progress-striped active" max="pokeman.base_experience" value='pokeman.current_hp' type="danger"><i>HP:{{pokeman.current_hp}} / {{pokeman.base_experience}}</i></uib-progressbar>
 	    		</li>
 	    </div>

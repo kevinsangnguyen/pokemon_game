@@ -1,3 +1,17 @@
-<div class="col-md-offset-6 col-md-6">
-	<a href="#/Main"><button class="btn btn-primary btn-lg">Click to PLAY</button></a>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bubblegum+Sans" />
+
+<div ng-controller="PlayerCount" style="background-image: url('../images/pikachu.jpg');width:1440px; height: 100%;">
+	<div class="col-md-offset-2 col-md-5">
+		<div style="font-family:'Bubblegum Sans'">
+	<h1>Welcome to Pokemon Simulation!</h1>
+	<ul class="list-group">
+		<li>Max: 2 Players</b></li>
+		<li>3 Random Starting Pokemon (refresh if less)</li>
+		<li>Walk to opponent to battle</li>
+	</ul>
+		</div>
+		<div>
+			<button ng-click ="game()"style="background:transparent;color:black; border: solid 5px red;margin-top:200px;width:400px;height:200px"class="btn btn-primary btn-lg"><span style="font-family:'Bubblegum Sans';font-size:30px;font-weight:400;">PLAY</span></button></a>
+		</div>
+	</div>
 </div>
