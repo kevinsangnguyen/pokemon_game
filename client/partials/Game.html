@@ -112,8 +112,15 @@
 	        </div>
 	    </div>
 
+	    <div class="modal-footer" ng-if="!current_pokemon && alert && !lost">
+	    	<div class="col-md-4 alert alert-warning" ng-if="alert">
+			  <strong>{{alert}}</strong>
+			</div>
+		</div>
 	    <div class="modal-footer" ng-if="lost && !current_pokemon">
-	    	<h1>Sorry, you have lost! Please refresh to play again!</h1>
+		    <div class="col-md-4 alert alert-warning" ng-if="alert">
+				  <strong>Sorry, you have lost! Please refresh to play again!</strong>
+			</div>
 	    </div>
 	</script>
 
