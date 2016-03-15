@@ -3,7 +3,10 @@ Technologies: MongoDB,Express.js, AngularJS, Node.js, Sockets.io, ui-bootstrap
 
 *A multiplayer(2) javascript built game that mimics the functionality of the original Pokemon game while utilizing sockets.*
 
+- - - - 
+
 ####Functions:####
+- *More than two players not yet implemented. 
 - Pokemon API(pokeapi.co) used to gather original 151 pokemon for pictures, moves lists and pokemon data. 
 - Pokemon health, attacks, attack power manipulated by own algorithms.
 - User is equipped with three random pokemon at the start.
