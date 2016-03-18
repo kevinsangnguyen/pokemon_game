@@ -1,7 +1,8 @@
 # Pokemon Socket Simulation  #
 Technologies: MongoDB,Express.js, AngularJS, Node.js, Sockets.io, ui-bootstrap
-Demo: https://kevinsangnguyen.com/pokemon
------
+
+[Demo](https://www.kevinsangnguyen.com/pokemon)
+
 *A multiplayer(2) javascript built game that mimics the functionality of the original Pokemon game while utilizing sockets.*
 
 - - - - 
