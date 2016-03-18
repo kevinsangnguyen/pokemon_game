@@ -1,6 +1,7 @@
 <html ng-app="board">
 <head>
-	<title>Pokemon Simulation</title>
+	<title>Pokemon Socket Simulation</title>
+	<link rel="shortcut icon" href="./images/favicon.ico" />
 	<!-- require angular -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
@@ -10,12 +11,15 @@
 	<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="./style/style.css">
+	<link rel="stylesheet" href="./style/animate.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
+	<!-- FONT -->
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'>
+	<!-- APP -->
 	<script type='text/javascript'>
-  
-	var board = angular.module('board', ['ngRoute','ui.bootstrap']);
 
+	var board = angular.module('board', ['ngRoute','ui.bootstrap','ngAnimate']);
 	board.config(function ($routeProvider, $locationProvider) {
       $routeProvider
         .when('/',{
@@ -29,31 +33,16 @@
         });
     });
 	</script>
-
+	<!--  CONTROLLERS/FACTORIES/JS -->
 	<script type="text/javascript" src="js/game.js"></script>
 	<script type="text/javascript" src="factories/socket.js"></script>
 	<script type="text/javascript" src="factories/pokemon_factory.js"></script>
 	<script type="text/javascript" src="controllers/pokemon_controller.js"></script>
 	<script type="text/javascript" src="controllers/main_controller.js"></script>
 
-	<style>
-	.start-bg {
-		background-image: url('../images/pikachu.jpg');
-	}
-
-	.game-bg {
-		background: url('../images/snorlax.jpg') no-repeat center center fixed;
-		background-attachment: fixed;
-		background-size: cover;
-	}
-
-
-	</style>
-
-
 </head>
 
-<body ng-controller='MainController' ng-class="bgService.getCurrentBg()">
+<body ng-controller='MainController' ng-class="bgService.getCurrentBg()" style="font-family: 'Josefin Sans', sans-serif;">
   <div ng-view=''>
   </div>
 </body>

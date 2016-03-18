@@ -1,0 +1,66 @@
+body{
+  margin:0;
+  padding:0;
+}
+
+.start-bg {
+  background-image: url('../images/pikachu.jpg');
+}
+
+.game-bg {
+  background: url('../images/snorlax.jpg') no-repeat center center fixed;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+
+.character1{
+  width:18px;
+  height:23px;
+  display:inline-block;
+  position:absolute;
+  top:165px;
+  left:115px;
+}
+.character2{
+  width:18px;
+  height:23px;
+  display:inline-block;
+  position:absolute;
+  top:190px;
+  left:400px;
+}
+#field{
+  background-image: url('../images/Training.png');
+  width: 940px;
+  height: 320px;
+  position: relative;
+  border: black solid 10px;
+  margin: 10px auto;
+  background-color:white;
+}
+
+#info {
+  width: 940px;
+  height: 320px;
+  position: relative;
+  margin: 10px auto;
+}
+
+.app-modal-window .modal-dialog {
+  width: 1250px;
+  height: 750px;
+}
+
+#main{
+  height:100%;
+  width:995px;
+  margin-left: 70px;
+  position:absolute;
+  opacity: 0.5;
+  background-color: white;
+}
+
+th {
+  font-size:18px;
+}

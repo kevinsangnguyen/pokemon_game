@@ -18,21 +18,6 @@ board.controller('PokemonController', function($scope,PokemonFactory,$uibModal,$
 			PokemonFactory.getAll();
 		}
 
-		// $scope.addCustomer = function() {
-		// 	UserFactory.create($scope.new_customer);
-		// 	$scope.new_customer = {};
-		// };
-
-		// $scope.deleteCustomer = function(customer) {
-		// 	UserFactory.remove(customer)
-		// }
-
-		// $scope.enter = function() {
-		// 	UserFactory.find($scope.name);
-		// 	$scope.users.push($scope.name);
-		// 	$scope.current_user = $scope.name
-		// }
-
 		$scope.animationsEnabled = true;
 
 	  $scope.yourpokeman = function (size,pokeman) {
@@ -268,7 +253,7 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 		  {
 		  	socket.emit("character2_current_pokemon",$scope.current_pokemon);
 		  }
-	  	
+
 	  };
 
 	  $scope.attack = function(move){
@@ -298,9 +283,6 @@ board.controller('BattleCtrl', function($scope,$uibModalInstance,mypokemon,mycha
 	  socket.on("alert",function(alert){
 	  	$scope.alert = alert;
 	  })
-
-
-
 
 	  $scope.cancel = function () {
 	  	$scope.won = false;
