@@ -4,7 +4,7 @@ var express = require('express');
 var path = require('path');
 // instantiate the app
 var app = express();
-var bodyParser = require('body-parser'); 
+var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '150mb'}));
 app.use(bodyParser.urlencoded({limit: '150mb'}));
 // set up a static file server that points to the "client" directory
@@ -32,6 +32,7 @@ var number_players = characters.length
 
 io.sockets.on('connection', function (socket) {
 
+  // Check characters for open slot
 	if(!character1){
 		socket.emit("START",{status:"Character1",character1 : character1, character2: character2})
 		character1 = {};
@@ -47,6 +48,7 @@ io.sockets.on('connection', function (socket) {
 	}
 
 
+  // Update each character's location/id
 	socket.on('update1',function(char1){
 		if (character1){
 			if (character1.socketid){
@@ -66,6 +68,7 @@ io.sockets.on('connection', function (socket) {
 		}
 	})
 
+  // Constant update
 	setInterval(function() {
 		socket.emit("char1update",character1)
 	},200);
@@ -73,6 +76,7 @@ io.sockets.on('connection', function (socket) {
 		socket.emit("char2update",character2)
 	},200);
 
+  // Collision detection for Battle
 	setInterval(function() {
 		if (character1 && character2){
 			delta_x = Math.abs(character1.ch_x - character2.ch_x);
@@ -91,6 +95,8 @@ io.sockets.on('connection', function (socket) {
 		}
 	},200);
 
+
+// Battle sequence
 	socket.on("character1_current_pokemon",function(pokemon){
 		character1_current_pokemon = pokemon;
 		io.emit("character1_pokemon", character1_current_pokemon)
@@ -139,7 +145,7 @@ io.sockets.on('connection', function (socket) {
 	socket.on("battle_ready",function(){
 		battling = false;
 	})
-	
+
 
 	socket.on('disconnect', function(){
 		console.log("disconnected")
@@ -157,5 +163,5 @@ io.sockets.on('connection', function (socket) {
 		}
 	})
 
-  
+
 });

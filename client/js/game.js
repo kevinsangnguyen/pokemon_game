@@ -2,6 +2,7 @@ function PlayGround(selector_ch1,x,y,action,default_action)
 {
 	var ch1 = new Character(selector_ch1,x,y,action,default_action);
 
+	// Character Controls
 	this.initialize = function() {
 		$(document).keydown(function(e) {
 			if(e.keyCode == 68) {
@@ -20,6 +21,7 @@ function PlayGround(selector_ch1,x,y,action,default_action)
 		});
 	}
 
+	// Drawing loop
 	this.mainLoop = function()
 	{
 		ch1.drawCharacter();
@@ -66,7 +68,7 @@ function Character(selector,x,y,action,default_action)
 			}
 			default_action = false;
 		}
-		if (this.action=='UP' && counter == 0){ 
+		if (this.action=='UP' && counter == 0){
 			$('#'+selector).css('background', "url('../images/" + selector + "/walking_up1.png')").css('top',this.ch_y+"px");
 		}
 		else if (this.action=='UP' && counter == 1){
@@ -87,7 +89,7 @@ function Character(selector,x,y,action,default_action)
 			$('#'+selector).css('background', "url('../images/" + selector + "/standing_down.png')").css('top',this.ch_y+"px");
 		}
 
-		
+
 		else if (this.action=='LEFT' && counter == 0){
 			$('#'+selector).css('background', "url('../images/" + selector + "/walking_left1.png')").css('left',this.ch_x+"px");
 		}
@@ -125,7 +127,7 @@ function Character(selector,x,y,action,default_action)
 		}
 
 
-		else if(this.action == 'LEFT' && this.ch_x > 120) 
+		else if(this.action == 'LEFT' && this.ch_x > 120)
 		{
 			this.ch_x = this.ch_x-5;
 			counter += 1;
