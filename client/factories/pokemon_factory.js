@@ -1,11 +1,15 @@
 board.factory('PokemonFactory', function($http) {
+		function imgIndex(index){
+			var new_index = "00" + index
+			return new_index.slice(-3);
+		}
 		var factory = {};
 		var pokemon = [];
 
-		function uppercase(str)  
-		{  
+		function uppercase(str)
+		{
 		      return str.charAt(0).toUpperCase() + str.substring(1,str.length);
-		}  
+		}
 
 		factory.index = function(callback) {
 			pokemon = [];
@@ -32,6 +36,8 @@ board.factory('PokemonFactory', function($http) {
 					}
 					output.current_hp = Math.floor(output.current_hp * 1.25)
 					output.base_experience = Math.floor(output.base_experience * 1.25)
+					output.imgindex = imgIndex(output.index);
+					console.log(output)
 					pokemon.push(output);
 				});
 			}
@@ -57,14 +63,14 @@ board.factory('PokemonFactory', function($http) {
 		// 	$http.get('/current_user/'+userid).success(function(output){
 		// 		callback(output);
 		// 	})
-		// } 
+		// }
 
 		factory.create = function(pokemon) {
 			$http.post('/create_pokemon',pokemon).success(function(created_pokemon){
 				if (created_pokemon){
 				}
 				else {
-					
+
 				}
 			})
 		}
@@ -75,7 +81,7 @@ board.factory('PokemonFactory', function($http) {
 		// 			console.log("Adding new user")
 		// 			factory.create(user);
 		// 			callback(current_user)
-					
+
 		// 		}
 		// 		else {
 		// 			console.log("Found user")

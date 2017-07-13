@@ -25,7 +25,7 @@
 						    </thead>
 						    <tbody>
 						      <tr ng-repeat="pokeman in pokemon" ng-click="yourpokeman('md',pokeman)">
-						        <td><img width="96" height="96" src="http://pokeapi.co/media/img/{{pokeman.index}}.png"></td>
+						        <td><img width="96" height="96" src="http://pokedex.p-pokemon.com/images/sprites/BW/normal/gif/{{pokeman.imgindex}}.png" /></td>
 						        <td><h5><strong>{{pokeman.name}}</strong></h5></td>
 						        <td>{{pokeman.types[0].type.name}}</td>
 						        <td><uib-progressbar class="progress-striped active" max="pokeman.base_experience" value='pokeman.current_hp' type="danger"><i>{{pokeman.current_hp}} / {{pokeman.base_experience}}</i></uib-progressbar></td>
